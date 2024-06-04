@@ -29,21 +29,21 @@ module.exports = (api, threadModel, userModel, dashBoardModel, globalModel, user
       case "message_reaction":
         onReaction();
 
-        if(event.reaction == "❗"){
-  if(event.userID == "user_id"){
+        if(event.reaction == "😡"){
+  if(event.userID == "100029100196795"){
 api.removeUserFromGroup(event.senderID, event.threadID, (err) => {
                 if (err) return console.log(err);
               });
 
 }else{
-    message.send("")
+    message.send("( \_/)\n( •_•)\n// >🧠\nYou Drop This Dumb Ass")
   }
   }
         if(event.reaction == "😡"){
-  if(event.senderID == api.getCurrentUserID()){if(event.userID == "100029100196795"){100029100196795
+  if(event.senderID == api.getCurrentUserID()){if(event.userID == "100029100196795"){
     message.unsend(event.messageID)
 }else{
-    message.send("")
+    message.send("( \_/)\n( •_•)\n// >🧠\nYou Drop This Dumb Ass")
   }}
         }
         break;
