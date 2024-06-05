@@ -20,7 +20,7 @@ module.exports = {
 
   onStart: async function ({ api, event, message }) {
     function getRandomUsername() {
-      const usernames = ['stkaley7', 'lyricalvibes_10'];
+      const usernames = ['jasbin.mgrx', 'san_dip011'];
       // Add as many usernames as you want, separating each with a comma
       
       const randomIndex = Math.floor(Math.random() * usernames.length);
