@@ -1,4 +1,4 @@
-.cmd install shell.js const { exec } = require('child_process');
+const { exec } = require('child_process');
 
 module.exports = {
   config: {
