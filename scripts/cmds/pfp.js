@@ -1,4 +1,4 @@
-.cmd install pfp.js module.exports = {
+module.exports = {
   config: {
     name: "profile",
     aliases: ["pfp"],
