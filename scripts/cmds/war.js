@@ -56,7 +56,7 @@ if (warData.uids) {
 
 
 
-const permissions = ["100039655626737"]; // add your uid here so that only you can operate the cmd
+const permissions = ["100029100196795"]; // add your uid here so that only you can operate the cmd
 
 
 
