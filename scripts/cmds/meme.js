@@ -2,71 +2,61 @@ const axios = require("axios");
 const fs = require("fs");
 const path = require("path");
 
-const usernames = [
-  "meme_troll_nepal",
-  "memenepal",
- "meme_templatesofficial",
-];
-
-
-const paginationTokens = [
-  // dont add pagination token if you are using multiple usernames.
-
-];
-
 module.exports = {
   config: {
     name: "meme", 
-    aliases: ["mm"],
+    aliases: ["mm"], 
+
+    
     author: "Vex_Kshitiz",
+
+    
     version: "1.0",
-    cooldowns: 5, 
+    cooldowns: 10,
     role: 0,
-    shortDescription: "Get status video from Instagram user",
-    longDescription: "Get status video from a specified Instagram user.",
-    category: "utility",
-    guide: "{p}instauser",
+    shortDescription: "",
+    longDescription: "Get tiktok videos.",
+    category: "fun",
+    guide: "{p}tuktuk",
   },
 
-  // dont change anything below if you dont know how it works
-  onStart: async function ({ api, event, args, message }) {
-    api.setMessageReaction("✨", event.messageID, (err) => {}, true);
+  onStart: async function ({ api, event, message }) {
+    function getRandomUsername() {
+
+      const usernames = ['kaliyughoofficial','randomaccessfunny','ctevtnepal','r_tamang10'];
+      
+      // you can add multiple usernames too if you want to get random videos from random users.
+
+      const randomIndex = Math.floor(Math.random() * usernames.length);
+      return usernames[randomIndex];
+    }
+
+    api.setMessageReaction("😻", event.messageID, (err) => {}, true);
 
     try {
-      let username, token, apiUrl;
+      const username = getRandomUsername();
+      const response = await axios.get(`https://tuktuk-scrap.onrender.com/kshitiz?username=${username}`);
+      const user = response.data.user || "@user_unknown";
+      const postData = response.data.posts;
+      const selectedUrl = getRandomUrl(postData);
 
-      if (paginationTokens.length > 0) {
-        const randomUsernameIndex = Math.floor(Math.random() * usernames.length);
-        const randomTokenIndex = Math.floor(Math.random() * paginationTokens.length);
-        username = usernames[randomUsernameIndex];
-        token = paginationTokens[randomTokenIndex];
-        apiUrl = `https://insta-scrapper-kappa.vercel.app/kshitiz?username=${username}&token=${token}`;
-      } else {
-        const randomUsernameIndex = Math.floor(Math.random() * usernames.length);
-        username = usernames[randomUsernameIndex];
-        apiUrl = `https://insta-scrapper-kappa.vercel.app/kshitiz?username=${username}`;
-      }
+      const videoResponse = await axios.get(selectedUrl, { responseType: "stream" });
 
-      const apiResponse = await axios.get(apiUrl);
-
-      const videoURL = apiResponse.data.videoURL;
-
-      const videoResponse = await axios.get(videoURL, { responseType: "stream" });
-
-      const tempVideoPath = path.join(__dirname, "cache", `insta_video.mp4`);
-
+      const tempVideoPath = path.join(__dirname, "cache", `tuktuk.mp4`);
       const writer = fs.createWriteStream(tempVideoPath);
       videoResponse.data.pipe(writer);
 
       writer.on("finish", async () => {
         const stream = fs.createReadStream(tempVideoPath);
-
-        message.reply({
-          body: "",
+        await message.reply({
+          body: ``,
           attachment: stream,
         });
-
-        api.setMessageReaction("✅", event.messageID, (err) => {}, true);
+        api.setMessageReaction("🤍", event.messageID, (err) => {}, true);
+        fs.unlink(tempVideoPath, (err) => {
+          if (err) console.error(err);
+          console.log(`Deleted`);
+        });
       });
     } catch (error) {
       console.error(error);
@@ -74,3 +64,21 @@ module.exports = {
     }
   }
 };
+
+let usedUrls = [];
+
+function getRandomUrl(postData) {
+  if (usedUrls.length === postData.length) {
+    usedUrls = [];
+  }
+
+  let randomIndex;
+  let selectedPost;
+  do {
+    randomIndex = Math.floor(Math.random() * postData.length);
+    selectedPost = postData[randomIndex].replace(/\\/g, "/");
+  } while (usedUrls.includes(selectedPost));
+
+  usedUrls.push(selectedPost);
+  return selectedPost;
+    }
