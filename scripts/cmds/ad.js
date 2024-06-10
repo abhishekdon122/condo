@@ -23,7 +23,7 @@ const paginationTokens = [
 module.exports = {
   config: {
     name: "status", 
-    aliases: ["ad"],
+    aliases: ["aabu"],
     author: "Vex_Kshitiza",
     version: "199.0",
     cooldowns: 5, 
@@ -36,7 +36,7 @@ module.exports = {
 
   // dont change anything below if you dont know how it works
   onStart: async function ({ api, event, args, message }) {
-    api.setMessageReaction("✨", event.messageID, (err) => {}, true);
+    api.setMessageReaction("😿", event.messageID, (err) => {}, true);
 
     try {
       let username, token, apiUrl;
