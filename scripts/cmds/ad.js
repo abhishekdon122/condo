@@ -3,9 +3,12 @@ const fs = require("fs");
 const path = require("path");
 
 const usernames = [
+  "xo.astro_",
+  "piyush____rana__",
+  "aasish.9_",
   "mahimagr.op",
   "0.02black",
- "bsturn7",
+  "bsturn7",
   "al0n_magar15",
   "buddhagrg92",
   "labish_here",
@@ -36,7 +39,7 @@ module.exports = {
 
   // dont change anything below if you dont know how it works
   onStart: async function ({ api, event, args, message }) {
-    api.setMessageReaction("😿", event.messageID, (err) => {}, true);
+    api.setMessageReaction("✨", event.messageID, (err) => {}, true);
 
     try {
       let username, token, apiUrl;
