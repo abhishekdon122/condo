@@ -23,7 +23,7 @@ module.exports = {
   onStart: async function ({ api, event, message }) {
     function getRandomUsername() {
 
-      const usernames = ['xyzmusix','srkfilmz', ',brrowntok','lyricalvibes_10'];
+      const usernames = ['srkfilmz', ',brrowntok','lyricalvibes_10'];
       
       // you can add multiple usernames too if you want to get random videos from random users.
 
