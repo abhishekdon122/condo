@@ -1,11 +1,11 @@
-const axios = require("axios");
+.cmd install lines.js const axios = require("axios");
 const fs = require("fs");
 const path = require("path");
 
 module.exports = {
   config: {
     name: "lines", 
-    aliases: ["l"], 
+    aliases: ["ls"], 
 
     
     author: "Vex_Kshitiz",
@@ -23,7 +23,7 @@ module.exports = {
   onStart: async function ({ api, event, message }) {
     function getRandomUsername() {
 
-      const usernames = ['zerox.is.back','anurag_karki8','asmit_chhetri10','lm10ujjwal','karan_chhetri26','lowkey77770','sunil_______gurung','kulung_trek'];
+      const usernames = ['msserugo','chuppa_deu','amar_chhetri4','shubu__yt','zerox.is.back','anurag_karki8','asmit_chhetri10','lm10ujjwal','karan_chhetri26','lowkey77770','sunil_______gurung','kulung_trek'];
       
       // you can add multiple usernames too if you want to get random videos from random users.
 
