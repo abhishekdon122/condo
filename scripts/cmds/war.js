@@ -20,7 +20,7 @@ const m = [
   "oe randi ko baccha muji gawar ko aulad",
     "mero lado chusna aaijata xoro hos ki xori",
     "tero aama ko ganaune puti ma mero lado hulum 😈",
-"machikne gawar ko baccha aaija deepam ko ladoo chusna ",
+"machikne gawar ko baccha aaija abhishek ko ladoo chusna ",
   "aaukat less kami ko baccha lado chusne ni aukat xaina",
   "deepam ko lado chusna ni aukat chainxa jun ta ma xaina dalit ko baccha",
   "randi ko baccha condom futera janmeko mero najayas aulad",
