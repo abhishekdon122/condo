@@ -23,7 +23,7 @@
 		const hours = Math.floor((uptime / (60 * 60)) % 24);
 		const days = Math.floor(uptime / (60 * 60 * 24));
 		const uptimeString = `${days} days ${hours} hours ${minutes} minutes ${seconds} second`;
-		api.sendMessage(` Hello Master 😸
+		api.sendMessage(` Hello Abhishek Babe😈🤍
  
 
            Your Bot Has been running for
