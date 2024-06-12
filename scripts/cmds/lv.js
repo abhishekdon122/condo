@@ -7,7 +7,7 @@ module.exports = {
   threadStates: {},
 
   config: {
-    name: 'lv',
+    name: 'lev',
     aliases: ['lev'],
     version: '1.0',
     author: 'Kshitiz',
