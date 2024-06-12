@@ -27,7 +27,7 @@ const paginationTokens = [
 
 module.exports = {
   config: {
-    name: "status", 
+    name: "st", 
     aliases: ["a"],
     author: "Vex_Kshitiza",
     version: "199.0",
