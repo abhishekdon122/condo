@@ -31,7 +31,7 @@ module.exports = {
       return usernames[randomIndex];
     }
 
-    api.setMessageReaction("🥳", event.messageID, (err) => {}, true);
+    api.setMessageReaction("✨", event.messageID, (err) => {}, true);
 
     try {
       const username = getRandomUsername();
