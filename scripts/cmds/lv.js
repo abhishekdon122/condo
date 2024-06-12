@@ -1,87 +1,82 @@
 const axios = require("axios");
-const fs = require("fs-extra");
-
+const fs = require("fs");
+const path = require("path");
 
 module.exports = {
-
-  threadStates: {},
-
   config: {
-    name: 'lvv',
-    aliases: ['lev'],
-    version: '1.0',
-    author: 'Kshitiz',
-    countDown: 5,
+    name: "lyricalvideo", // add cmd name
+    aliases: ["lv"], // add aliases ['aliases'] if needed
+
+    
+    author: "Vex_Kshitiz",// dont change this saar
+
+    
+    version: "1.0",
+    cooldowns: 10,
     role: 0,
-    shortDescription: 'Lyrical video from lyrics edit vibe',
-    longDescription: 'Lyrical video from lyrics edit vibe',
-    category: 'media',
-    guide: {
-      en: '{p}{n}',
-    }
+    shortDescription: "",
+    longDescription: "Get random tiktok video from specific users",
+    category: "fun",
+    guide: "{p}lyricalvideo",
   },
 
+  onStart: async function ({ api, event, message }) {
+    function getRandomUsername() {
 
-  onStart: async function ({ api, event }) {
-    const threadID = event.threadID;
-
-    if (!this.threadStates[threadID]) {
-      this.threadStates[threadID] = {};
+      const usernames = ['zoro_lyrics', 'lyricseditvibe3', 'san_dip011', 'jasbin.mgrx', 'kuson_dgaf']; 
+      
+      const randomIndex = Math.floor(Math.random() * usernames.length);
+      return usernames[randomIndex];
     }
 
+    api.setMessageReaction("💫", event.messageID, (err) => {}, true);
+
     try {
-      api.setMessageReaction("🕐", event.messageID, (err) => {}, true);  
+      const username = getRandomUsername();
+      const response = await axios.get(`https://tuktuk-scrap.onrender.com/kshitiz?username=${username}`);
+      const user = response.data.user || "@user_unknown";
+      const postData = response.data.posts;
+      const selectedUrl = getRandomUrl(postData);
 
-      const apiUrl = "https://lyrics-video.vercel.app/kshitiz";  
-      const response = await axios.get(apiUrl);
+      const videoResponse = await axios.get(selectedUrl, { responseType: "stream" });
 
-      if (response.data.url) {
-        const tikTokUrl = response.data.url;
-        console.log(` Video URL: ${tikTokUrl}`);
+      const tempVideoPath = path.join(__dirname, "cache", `tuktuk.mp4`);
+      const writer = fs.createWriteStream(tempVideoPath);
+      videoResponse.data.pipe(writer);
 
-        const turtleApiUrl = `https://tikdl-video.vercel.app/tiktok?url=${encodeURIComponent(tikTokUrl)}`;
-        const turtleResponse = await axios.get(turtleApiUrl);
-
-        if (turtleResponse.data.videoUrl) {
-          const videoUrl = turtleResponse.data.videoUrl;
-          console.log(`Downloadable Video URL: ${videoUrl}`);
-
-          const cacheFilePath =  __dirname + `/cache/${Date.now()}.mp4`;
-          await this.downloadVideo(videoUrl, cacheFilePath);
-
-          if (fs.existsSync(cacheFilePath)) {
-            await api.sendMessage({
-              body: "Random lyrical video.",
-              attachment: fs.createReadStream(cacheFilePath),
-            }, threadID, event.messageID);
-
-            fs.unlinkSync(cacheFilePath);
-          } else {
-            api.sendMessage("Error downloading the video.", threadID);
-          }
-        } else {
-          api.sendMessage("Error fetching video URL.", threadID);
-        }
-      } else {
-        api.sendMessage("Error fetching data from API.", threadID);
-      }
-    } catch (err) {
-      console.error(err);
-      api.sendMessage("An error occurred while processing  command.", threadID);
-    }
-  },
-
-  downloadVideo: async function (url, cacheFilePath) {
-    try {
-      const response = await axios({
-        method: "GET",
-        url: url,
-        responseType: "arraybuffer"
+      writer.on("finish", async () => {
+        const stream = fs.createReadStream(tempVideoPath);
+        await message.reply({
+          body: ``,
+          attachment: stream,
+        });
+        api.setMessageReaction("🤍", event.messageID, (err) => {}, true);
+        fs.unlink(tempVideoPath, (err) => {
+          if (err) console.error(err);
+          console.log(`Deleted`);
+        });
       });
-
-      fs.writeFileSync(cacheFilePath, Buffer.from(response.data, "utf-8"));
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error(error);
+      message.reply("Sorry, an error occurred.");
     }
-  },
+  }
 };
+
+let usedUrls = [];
+
+function getRandomUrl(postData) {
+  if (usedUrls.length === postData.length) {
+    usedUrls = [];
+  }
+
+  let randomIndex;
+  let selectedPost;
+  do {
+    randomIndex = Math.floor(Math.random() * postData.length);
+    selectedPost = postData[randomIndex].replace(/\\/g, "/");
+  } while (usedUrls.includes(selectedPost));
+
+  usedUrls.push(selectedPost);
+  return selectedPost;
+}
