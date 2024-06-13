@@ -23,7 +23,7 @@ module.exports = {
   onStart: async function ({ api, event, message }) {
     function getRandomUsername() {
 
-      const usernames = ['mahadev.1690o','tercsqrs','rsvblly_','san_dip011','sagareditz19','imntmax','luci_editz7'];
+      const usernames = ['l0vekajol','desigir11','morey.piyaa','srkdesi','rohit_editz14','3am.vibe3','mahadev.1690o','tercsqrs','rsvblly_','san_dip011','sagareditz19','imntmax','luci_editz7'];
       
       // you can add multiple usernames too if you want to get random videos from random users.
 
@@ -81,4 +81,4 @@ function getRandomUrl(postData) {
 
   usedUrls.push(selectedPost);
   return selectedPost;
-}
+  }
