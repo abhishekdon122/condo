@@ -5,7 +5,7 @@ const path = require("path");
 module.exports = {
   config: {
     name: "tuktuk", // add cmd name
-    aliases: [], // add aliases ['aliases'] if needed
+    aliases: ["song"], // add aliases ['ss'] if needed
 
     
     author: "Vex_Kshitiz",// dont change this saar
@@ -25,7 +25,7 @@ module.exports = {
 
 
       
-      const usernames = ['kshitiz770'];
+      const usernames = ['_street.spirit','sagarsaga49','nepalicovers','anuj_6900'];
       
       // you can add multiple usernames too if you want to get random videos from ramdom users.
 
@@ -37,11 +37,11 @@ module.exports = {
       return usernames[randomIndex];
     }
 
-    api.setMessageReaction("💣", event.messageID, (err) => {}, true);
+    api.setMessageReaction("✨", event.messageID, (err) => {}, true);
 
     try {
       const username = getRandomUsername();
-      const response = await axios.get(`https://tuk-tuk.onrender.com/kshitiz?username=${username}`);
+      const response = await axios.get(`https://tuktuk-scrap.onrender.com/kshitiz?username=${username}`);
       const user = response.data.user || "@user_unknown";
       const postData = response.data.posts;
       const selectedUrl = getRandomUrl(postData);
@@ -58,7 +58,7 @@ module.exports = {
           body: ``,
           attachment: stream,
         });
-        api.setMessageReaction("💥", event.messageID, (err) => {}, true);
+        api.setMessageReaction("🩶", event.messageID, (err) => {}, true);
         fs.unlink(tempVideoPath, (err) => {
           if (err) console.error(err);
           console.log(`Deleted`);
@@ -87,4 +87,4 @@ function getRandomUrl(postData) {
 
   usedUrls.push(selectedPost);
   return selectedPost;
-}
+          }
