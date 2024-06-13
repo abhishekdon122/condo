@@ -18,7 +18,7 @@ const m = [
 
 
   "mero lado chusne ni aukaat xainaa terooo aukaat bana ujajaa valu",
-    "mero lado ma ping khelxass tww Randi Ka xoro le 😈",
+    "mero lado ma ping khelxass tww randi Ka xoro le 😈",
 "machikney gawarr ka bchaaa aaaije abhishekhh kO lado chuss ",
   "ladolesss kiddooo merro lado koo talaaa chippliyera marlassss",
   "randiiii ka baaccha teri aama pathaa",
