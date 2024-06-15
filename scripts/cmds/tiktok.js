@@ -20,8 +20,8 @@ async function fetchTikTokVideos(keyword) {
 
 module.exports = {
   config: {
-    name: "tiktok",
-    aliases: [],
+    name: "tikuk",
+    aliases: [tt],
     author: "kshitiz",
     version: "1.0",
     shortDescription: {
