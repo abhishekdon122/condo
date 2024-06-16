@@ -58,7 +58,7 @@ async function sing(api, event, args, message) {
     writer.on('finish', async () => {
       try {
         const audioStream = fs.createReadStream(filePath);
-        const sentMessage = await message.reply({ body: ``, attachment: audioStream });
+        const sentMessage = await message.reply({ body: ``, attachment: audioStream }); // Empty body
         api.setMessageReaction("✅", event.messageID, () => {}, true);
 
         global.GoatBot.onReply.set(sentMessage.messageID, {
