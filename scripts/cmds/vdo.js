@@ -4,7 +4,7 @@ const path = require("path");
 
 module.exports = {
   config: {
-    name: "video", 
+    name: "vdo", 
     aliases: ["vd"], 
 
     
