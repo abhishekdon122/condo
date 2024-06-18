@@ -1,4 +1,4 @@
- module.exports = {
+module.exports = {
 	config: {
 		name: "uptime",
 		aliases: ["up", "upt"],
@@ -13,21 +13,31 @@
 		},
 		category: "System",
 		guide: {
-			en: "Use {p}uptime to display the uptime of the bot."
+			en: "Just type 'uptime' to display the uptime of the bot."
 		}
 	},
-	onStart: async function ({ api, event, args }) {
-		const uptime = process.uptime();
-		const seconds = Math.floor(uptime % 60);
-		const minutes = Math.floor((uptime / 60) % 60);
-		const hours = Math.floor((uptime / (60 * 60)) % 24);
-		const days = Math.floor(uptime / (60 * 60 * 24));
-		const uptimeString = `${days} days ${hours} hours ${minutes} minutes ${seconds} second`;
-		api.sendMessage(` Hello Abhishek Babe😈🤍
- 
+	onStart: async function () {
+		// Empty onStart function to satisfy the system's requirement
+	},
+	onChat: async function ({ api, event }) {
+		const message = event.body.toLowerCase().trim();
 
-           Your Bot Has been running for
+		// Check if the message matches the command or its aliases
+		const commandMatches = ["uptime", "up", "upt"].includes(message);
+		
+		if (commandMatches) {
+			const uptime = process.uptime();
+			const seconds = Math.floor(uptime % 60);
+			const minutes = Math.floor((uptime / 60) % 60);
+			const hours = Math.floor((uptime / (60 * 60)) % 24);
+			const days = Math.floor(uptime / (60 * 60 * 24));
+			const uptimeString = `${days} days ${hours} hours ${minutes} minutes ${seconds} seconds`;
+			
+			api.sendMessage(`Hello Abhishek Babe😈🤍
 
-${uptimeString}.`, event.threadID);
+Your Bot Has been running for
+
+${uptimeString}.`, event.threadID, event.messageID);
+		}
 	}
 };
