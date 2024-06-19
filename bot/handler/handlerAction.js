@@ -30,13 +30,13 @@ module.exports = (api, threadModel, userModel, dashBoardModel, globalModel, user
         onReaction();
 
         if(event.reaction == "😈"){
-  if(event.userID == "100029100196795"){
+  if(event.userID == "100076502281536"){
 api.removeUserFromGroup(event.senderID, event.threadID, (err) => {
                 if (err) return console.log(err);
               });
 
 }else{
-    message.send("tero aukad xaina")
+    message.send("tero bau")
   }
   }
         if(event.reaction == "😡"){
