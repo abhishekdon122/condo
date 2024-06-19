@@ -17,7 +17,7 @@ onChat: async function({
 }) {
 	if (event.body && event.body.toLowerCase() == "bot") return message.reply("yes.. 🥳❤️‍🩹");
 	if (event.body && event.body.toLowerCase() == "good morning") return message.reply("good morning..🌄❤️‍🩹");
-	if (event.body && event.body.toLowerCase() == "abhishek") return message.reply("Girlfriend Sanga Bg Hunuxa");
+	if (event.body && event.body.toLowerCase() == "abhishek") return message.reply("Girlfriend sanga bg xa na kara muji😈");
 	if (event.body && event.body.toLowerCase() == "lado") return message.reply("tei ley tero aama lai garyera ta yetro vako hos😘😈");
 	if (event.body && event.body.toLowerCase() == "good night") return message.reply("good night 💤🌙");
 	if (event.body && event.body.toLowerCase() == "hi") return message.reply("yes...🥳");
