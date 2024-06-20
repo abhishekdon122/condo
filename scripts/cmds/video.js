@@ -68,7 +68,7 @@ async function video(api, event, args, message) {
 
         writer.on('finish', () => {
             const videoStream = fs.createReadStream(path.join(__dirname, "cache", `${videoId}.mp4`)); 
-            message.reply({ body: `📹 Playing: ${title}\nDownload Link: ${shortUrl}`, attachment: videoStream });
+            message.reply({ body: ` \n `, attachment: videoStream });
             api.setMessageReaction("✅", event.messageID, () => {}, true);
         });
 
