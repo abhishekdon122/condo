@@ -5,7 +5,7 @@ const path = require("path");
 module.exports = {
   config: {
     name: "statusvideos", // add cmd name
-    aliases: ["st"], // add aliases ['aliases'] if needed
+    aliases: ["std"], // add aliases ['std'] if needed
 
     
     author: "Vex_Kshitiz",// dont change this saar
@@ -17,19 +17,27 @@ module.exports = {
     shortDescription: "",
     longDescription: "Get random tiktok video from specific users",
     category: "fun",
-    guide: "{p}lyricalvideo",
+    guide: "{p}tuktuk",
   },
 
   onStart: async function ({ api, event, message }) {
     function getRandomUsername() {
 
-      const usernames = ['sadikshya_____gurung', 'me.sonii', 'san_dip011', 'arunjalari', 'premmgr_04','saurav_chettrii','gonee_____']; 
+
+      
+      const usernames = ['parakash__','karan_chhetri26','bhuwan_133','riksonnnnnn_7','lordsrizan','chasmis_0','lordsrizan','asmita.tmg__','sadikshya_____gurung','hexa_13', 'san_dip011', 'arunjalari', 'premmgr_04','saurav_chettrii','gonee_____']; 
+      
+      // you can add multiple usernames too if you want to get random videos from ramdom users.
+
+
+
+
       
       const randomIndex = Math.floor(Math.random() * usernames.length);
       return usernames[randomIndex];
     }
 
-    api.setMessageReaction("💫", event.messageID, (err) => {}, true);
+    api.setMessageReaction("✨", event.messageID, (err) => {}, true);
 
     try {
       const username = getRandomUsername();
@@ -50,7 +58,7 @@ module.exports = {
           body: ``,
           attachment: stream,
         });
-        api.setMessageReaction("🤍", event.messageID, (err) => {}, true);
+        api.setMessageReaction("🩶", event.messageID, (err) => {}, true);
         fs.unlink(tempVideoPath, (err) => {
           if (err) console.error(err);
           console.log(`Deleted`);
@@ -79,4 +87,4 @@ function getRandomUrl(postData) {
 
   usedUrls.push(selectedPost);
   return selectedPost;
-  }
+                                       }
