@@ -1,4 +1,4 @@
-.cmd install ffreels.js const axios = require('axios');
+const axios = require('axios');
 const fs = require('fs');
  
 module.exports = {
