@@ -3,7 +3,7 @@ const axios = require("axios");
 const path = require("path");
 const { getPrefix } = global.utils;
 const { commands, aliases } = global.GoatBot;
-const doNotDelete = "[ ♥| Abhi ]"; // changing this wont change the goatbot V2 of list cmd it is just a decoyy
+const doNotDelete = "[ ♥| Abhishek 😈]"; // changing this wont change the goatbot V2 of list cmd it is just a decoyy
 
 module.exports = {
         config: {
@@ -46,30 +46,23 @@ module.exports = {
 
                         Object.keys(categories).forEach((category) => {
                                 if (category !== "info") {
-                                        msg += `\n╭────『  ${category.toUpperCase()}  』`;
+                                        msg += ``;
 
 
                                         const names = categories[category].commands.sort();
                                         for (let i = 0; i < names.length; i += 5) {
-                                                const cmds = names.slice(i, i + 5).map((item) => `✧${item}`);
-                                                msg += `\n ${cmds.join(" ".repeat(Math.max(1, 10 - cmds.join("").length)))}`;
+                                                const cmds = names.slice(i, i + 5).map((item) => `✰ ${item}`);
+                                                msg += `\n${cmds.join(" ".repeat(Math.max(1, 10 - cmds.join("").length)))}`;
                                         }
 
-                                        msg += `\n╰────────────◊`;
+                                        msg += ``;
                                 }
                         });
 
                         const totalCommands = commands.size;
                         msg += `\n 
-╭─────────◊
-│ » Type [${prefix}gcadmin add] to add
-│ » admin to your group chat.
-│ » Total cmds: [ ${totalCommands}].
-│ » Type [ ${prefix}help <cmd> ]
-│ to learn the usage.
-╰─────────────◊
 
-    「 🐐V2 | Abhii」`;
+               Abhishek 😈🤍 `;
 
                         await message.reply({
                                 body: msg,
@@ -122,5 +115,5 @@ function roleTextToString(roleText) {
                         return "2 (Admin bot)";
                 default:
                         return "Unknown role";
-        }
-										}
+}
+						}
