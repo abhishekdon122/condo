@@ -3,7 +3,7 @@ const axios = require("axios");
 const path = require("path");
 const { getPrefix } = global.utils;
 const { commands, aliases } = global.GoatBot;
-const doNotDelete = "[ ♥| Abhishek 😈]"; // changing this wont change the goatbot V2 of list cmd it is just a decoyy
+const doNotDelete = "[ ♥| Abhi ]"; // changing this wont change the goatbot V2 of list cmd it is just a decoyy
 
 module.exports = {
         config: {
@@ -43,26 +43,30 @@ module.exports = {
                                 categories[category] = categories[category] || { commands: [] };
                                 categories[category].commands.push(name);
                         }
-
                         Object.keys(categories).forEach((category) => {
                                 if (category !== "info") {
-                                        msg += ``;
-
+                                        msg += `\n╭────『  ${category.toUpperCase()}  』`;
 
                                         const names = categories[category].commands.sort();
                                         for (let i = 0; i < names.length; i += 5) {
-                                                const cmds = names.slice(i, i + 5).map((item) => `✰ ${item}`);
-                                                msg += `\n${cmds.join(" ".repeat(Math.max(1, 10 - cmds.join("").length)))}`;
+                                                const cmds = names.slice(i, i + 5).map((item) => `✧${item}`);
+                                                msg += `\n ${cmds.join(" ".repeat(Math.max(1, 10 - cmds.join("").length)))}`;
                                         }
 
-                                        msg += ``;
+                                        msg += `\n╰────────────◊`;
                                 }
                         });
 
                         const totalCommands = commands.size;
                         msg += `\n 
-
-               Abhishek 😈🤍 `;
+╭─────────◊
+│ » Type [${prefix}gcadmin add] to add
+│ » admin to your group chat.
+│ » Total cmds: [ ${totalCommands}].
+│ » Type [ ${prefix}help <cmd> ]
+│ to learn the usage.
+╰─────────────◊
+         Abhishek 😈🤍`;
 
                         await message.reply({
                                 body: msg,
@@ -116,4 +120,4 @@ function roleTextToString(roleText) {
                 default:
                         return "Unknown role";
 }
-						}
+					}
