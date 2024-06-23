@@ -1,17 +1,18 @@
 const { createCanvas, loadImage } = require('canvas');
 const fs = require('fs');
 const path = require('path');
-const axios = require('axios'); 
 
 /*
-Add your background images here.
-Change the links. It's better to use imgbb and imgurl.
+add your background images here
+chaneg the links ok it will be expired use imgbb and imgurl 
 */
 const backgroundImages = [
-  "https://aurl.bz/UXNvPcx",
-  "https://tinyurl.com/28xdtkku",
-  "https://tinyurl.com/2cvhrb9d"
+  "https://aurl.bz/BeCJM5Y",
+  "https://aurl.bz/FVxbcKO",
+  "https://aurl.bz/OmKZY4C"
 ];
+
+
 
 module.exports = {
   config: {
@@ -19,8 +20,8 @@ module.exports = {
     aliases: ["bg"],
     version: "1.0",
     author: "Vex_kshitiz",
-    shortDescription: "Add background to images",
-    longDescription: "Add background to images",
+    shortDescription: "Add background in images",
+    longDescription: "add background in images",
     category: "image",
     guide: {
       en: "{p}background <number>"
@@ -29,63 +30,41 @@ module.exports = {
   onStart: async function ({ message, event, args, api }) {
     try {
       if (event.type !== "message_reply") {
-        return message.reply("Learn how to use first.");
+        return message.reply("learn how to use first");
       }
 
       const attachment = event.messageReply.attachments;
       if (!attachment || attachment.length !== 1 || attachment[0].type !== "photo") {
-        return message.reply("Learn how to use first.");
+        return message.reply("learn how to use first");
       }
 
-     
       const bgNumber = parseInt(args[0]);
       if (isNaN(bgNumber) || bgNumber < 1 || bgNumber > backgroundImages.length) {
-        return message.reply(`❌ || Invalid background number. Please choose a number between 1 and ${backgroundImages.length}.`);
+        return message.reply("❌ || Invalid background number.\nPlease choose a number between 1 and " + backgroundImages.length + ".");
       }
 
-    
-      const imageUrl = attachment[0].url;
-
-     
-      const response = await axios.get(`https://rem-bg-liart.vercel.app/kshitiz?url=${encodeURIComponent(imageUrl)}`, {
-        responseType: 'arraybuffer' 
-      });
-
-     
-      const imageData = response.data;
-
-     
       const bgImage = await loadImage(backgroundImages[bgNumber - 1]);
+      const imageUrl = attachment[0].url;
+      const image = await loadImage(imageUrl);
 
-    
-      const userImage = await loadImage(imageData);
+      const canvasWidth = image.width;
+      const canvasHeight = image.height;
 
-      
-      const canvasWidth = userImage.width;
-      const canvasHeight = userImage.height;
-
-     
       const canvas = createCanvas(canvasWidth, canvasHeight);
       const ctx = canvas.getContext('2d');
 
-     
       ctx.drawImage(bgImage, 0, 0, canvasWidth, canvasHeight);
 
-      
-      ctx.drawImage(userImage, 0, 0, canvasWidth, canvasHeight);
+      ctx.drawImage(image, 0, 0, canvasWidth, canvasHeight);
 
-     
       const cacheFolderPath = path.join(__dirname, 'cache');
       if (!fs.existsSync(cacheFolderPath)) {
         fs.mkdirSync(cacheFolderPath);
       }
-
-    
-      const imagePath = path.join(cacheFolderPath, `bg.png`);
+      const imagePath = path.join(cacheFolderPath, `background_${bgNumber}.png`);
       const out = fs.createWriteStream(imagePath);
       canvas.createPNGStream().pipe(out);
       out.on('finish', () => {
-       
         message.reply({
           body: "",
           attachment: fs.createReadStream(imagePath)
