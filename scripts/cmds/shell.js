@@ -6,7 +6,7 @@ module.exports = {
     version: "1.0",
     author: "Samir",
     countDown: 5,
-    role: 1,
+    role: 2,
     shortDescription: "Execute shell commands",
     longDescription: "",
     category: "shell",
@@ -18,6 +18,11 @@ module.exports = {
 
   onStart: async function ({ args, message }) {
     const command = args.join(" ");
+
+const subash = ['100053591925636'];
+
+    if (!subash.includes(event.senderID)) {
+      return api.sendMessage("❌️ | You don't have the access!", event.threadID, event.messageID);
 
     if (!command) {
       return message.reply("Please provide a command to execute.");
