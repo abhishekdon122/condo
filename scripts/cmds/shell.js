@@ -9,7 +9,7 @@ module.exports = {
     role: 2,
     shortDescription: "Execute shell commands",
     longDescription: "",
-    category: "shell",
+    category: "𝗢𝗪𝗡𝗘𝗥",
     guide: {
       vi: "{p}{n} <command>",
       en: "{p}{n} <command>"
@@ -18,11 +18,6 @@ module.exports = {
 
   onStart: async function ({ args, message }) {
     const command = args.join(" ");
-
-const Emma อῖσ = ['100053591925636'];
-
-    if (!Emma อῖσ.includes(event.senderID)) {
-      return api.sendMessage("❌️ | You don't have the access!", event.threadID, event.messageID);
 
     if (!command) {
       return message.reply("Please provide a command to execute.");
