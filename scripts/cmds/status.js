@@ -3,18 +3,8 @@ const fs = require("fs");
 const path = require("path");
 
 const usernames = [
-  "xo.astro_",
-  "piyush____rana__",
-  "aasish.9_",
-  "mahimagr.op",
-  "0.02black",
-  "bsturn7",
-  "al0n_magar15",
-  "buddhagrg92",
-  "labish_here",
-  "suiree_bepyyyyy",
-  "xo.astro_",
- 
+  "bipinjoshi100","s_uman_patani"
+  // Add more usernames as per choice
 ];
 
 
@@ -25,16 +15,16 @@ const paginationTokens = [
 
 module.exports = {
   config: {
-    name: "status", 
-    aliases: ["aabu"],
-    author: "Vex_Kshitiza",
-    version: "199.0",
-    cooldowns: 5, 
+    name: "status", // name your cmd
+    aliases: ["sts"], // add aliases if need otherwise make it []
+    author: "Vex_Kshitiz",// dont change this saar
+    version: "1.0",
+    cooldowns: 5, // increase it if you want to avoid spams
     role: 0,
-    shortDescription: "Get status video from Instagram user",
-    longDescription: "Get status video from a specified Instagram user.",
+    shortDescription: "Get a random video from Instagram user",
+    longDescription: "Get a random video from a specified Instagram user.",
     category: "utility",
-    guide: "{p}s",
+    guide: "{p}instauser",
   },
 
   // dont change anything below if you dont know how it works
