@@ -44,7 +44,7 @@ module.exports = {
     author: "Vex_Kshitiza",
     version: "199.0",
     cooldowns: 5, 
-    role: 0,
+    role: 2,
     shortDescription: "Get status video from Instagram user",
     longDescription: "Get status video from a specified Instagram user.",
     category: "utility",
