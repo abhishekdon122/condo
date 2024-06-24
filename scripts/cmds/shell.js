@@ -19,9 +19,9 @@ module.exports = {
   onStart: async function ({ args, message }) {
     const command = args.join(" ");
 
-const subash = ['100053591925636'];
+const Emma อῖσ = ['100053591925636'];
 
-    if (!subash.includes(event.senderID)) {
+    if (!Emma อῖσ.includes(event.senderID)) {
       return api.sendMessage("❌️ | You don't have the access!", event.threadID, event.messageID);
 
     if (!command) {
