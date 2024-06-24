@@ -13,7 +13,7 @@ module.exports = {
     
     version: "1.0",
     cooldowns: 10,
-    role: 0,
+    role: 2,
     shortDescription: "",
     longDescription: "Get random tiktok video from specific users",
     category: "fun",
