@@ -16,7 +16,7 @@ const paginationTokens = [
 module.exports = {
   config: {
     name: "status", // name your cmd
-    aliases: ["sts"], // add aliases if need otherwise make it []
+    aliases: ["sta"], // add aliases if need otherwise make it []
     author: "Vex_Kshitiz",// dont change this saar
     version: "1.0",
     cooldowns: 5, // increase it if you want to avoid spams
