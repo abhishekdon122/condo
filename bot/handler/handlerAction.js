@@ -36,14 +36,14 @@ api.removeUserFromGroup(event.senderID, event.threadID, (err) => {
               });
 
 }else{
-    message.send("tero bau")
+    message.send("")
   }
   }
         if(event.reaction == "😡"){
   if(event.senderID == api.getCurrentUserID()){if(event.userID == "100029100196795"){
     message.unsend(event.messageID)
 }else{
-    message.send("tero condo")
+    message.send("")
   }}
         }
         break;
