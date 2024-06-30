@@ -12,7 +12,7 @@ if (!fs.existsSync(cacheFolder)) {
 
 module.exports = {
   config: {
-    name: "i2v2",
+    name: "add",
     version: "1.0",
     author: "Vex_Kshitiz",
     shortDescription: "Image to video",
