@@ -66,7 +66,7 @@ module.exports = {
 │ » Type [ ${prefix}help <cmd> ]
 │ to learn the usage.
 ╰─────────────◊
-         Abhishek 😈🤍`;
+            Abhishek 😈🤍`;
 
                         await message.reply({
                                 body: msg,
