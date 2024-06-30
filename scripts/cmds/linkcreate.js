@@ -27,8 +27,8 @@ async function shortURL(api, event) {
 
 module.exports = {
     config: {
-        name: "shorten",
-        aliases: ["s"],
+        name: "linkcreate",
+        aliases: ["link"],
         version: "1.0",
         author: "Vex_Kshitiz",
         countDown: 10,
