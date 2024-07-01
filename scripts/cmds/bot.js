@@ -81,7 +81,7 @@ async function helis(api, event, args, message) {
 
 module.exports = {
   config: {
-    name: "helis",
+    name: "bot",
     version: "1.0",
     author: "Vex_Kshitiz",
     role: 0,
