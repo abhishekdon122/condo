@@ -12,10 +12,10 @@ module.exports = {
   },
   onStart: async function(){},
   onChat: async function({ event, message, getLang }) {
-    if (event.body && event.body.toLowerCase() === "women") {
+    if (event.body && event.body.toLowerCase() === "lado") {
       return message.reply({
         body: "",
-        attachment: fs.createReadStream("women.mp4"),
+        attachment: fs.createReadStream("lado.mp3"),
       });
     }
   }
