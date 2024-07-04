@@ -11,7 +11,7 @@ module.exports = {
     role: 0,
     shortDescription: '',
     longDescription: 'get mood posting videos (Nepal)',
-    category: 'fun',
+    category: 'FUN',
     guide: {
       en: '{p}{n}',
     }
