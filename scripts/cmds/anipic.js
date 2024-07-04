@@ -15,7 +15,7 @@ module.exports = {
     longDescription: {
       en: "get a random anime picture"
     },
-    category: "𝗠𝗘𝗗𝗜𝗔",
+    category: "MEDIA",
     guide: {
       en: ""
     }
