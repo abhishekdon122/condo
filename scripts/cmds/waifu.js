@@ -5,7 +5,7 @@ module.exports = {
 		name: "waifu",
 		aliases: ["wife"],
 		version: "1.0",
-		author: "Unknown | Api Modifide by Fahim the Noob",
+		author: "Unknown | Api Modifide by Fahim_Noob",
 		countDown: 0,
 		role: 0,
 		shortDescription: "get random waifu",
@@ -23,7 +23,7 @@ module.exports = {
 				let img = res2.url;
 
 				const form = {
-					body: `   `
+					body: `    `
 				};
 				if (img)
 					form.attachment = await global.utils.getStreamFromURL(img);
@@ -38,7 +38,7 @@ module.exports = {
 				let img1 = res2.url;
 
 				const form = {
-					body: `     `
+					body: `      `
 				};
 				if (img1)
 					form.attachment = await global.utils.getStreamFromURL(img1);
