@@ -4,7 +4,7 @@ const path = require('path');
 const { getStreamFromURL, shortenURL, randomString } = global.utils;
 
 async function video(api, event, args, message) {
-    api.setMessageReaction("🕢", event.messageID, (err) => {}, true);
+    api.setMessageReaction("✨", event.messageID, (err) => {}, true);
     try {
         let title = '';
         let shortUrl = '';
@@ -72,7 +72,7 @@ async function video(api, event, args, message) {
             fs.writeFileSync(path.join(__dirname, "cache", `puti.m4a`), Buffer.from(data, 'utf-8'));
 
             const audioReadStream = fs.createReadStream(path.join(__dirname, "cache", `puti.m4a`));
-            message.reply({ body: `🎧 Playing: ${title}\nDownload Link: ${shortUrl}`, attachment: audioReadStream });
+            message.reply({ body: `\n`, attachment: audioReadStream });
             api.setMessageReaction("✅", event.messageID, () => {}, true);
         });
 
