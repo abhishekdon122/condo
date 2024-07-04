@@ -5,8 +5,8 @@ const fs = require("fs-extra");
 module.exports = {
   config: {
     name: "pair",
-    aurthor:"deepam",
-     role: 0,
+    author: "abhishek", // Corrected spelling of author
+    role: 0,
     shortDescription: " ",
     longDescription: "",
     category: "love",
@@ -21,32 +21,34 @@ module.exports = {
     var name1 = ""; // Replace with function that retrieves the name of the user
     var ThreadInfo = await api.getThreadInfo(event.threadID);
     var all = ThreadInfo.userInfo;
+    var gender1;
     for (let c of all) {
-      if (c.id == id1) var gender1 = c.gender;
+      if (c.id == id1) gender1 = c.gender;
     }
     const botID = api.getCurrentUserID();
     let ungvien = [];
     if (gender1 == "FEMALE") {
       for (let u of all) {
         if (u.gender == "MALE") {
-          if (u.id !== id1 && u.id !== botID) ungvien.push(u.id);
+          if (u.id !== id1 && u.id !== botID) ungvien.push(u);
         }
       }
     } else if (gender1 == "MALE") {
       for (let u of all) {
         if (u.gender == "FEMALE") {
-          if (u.id !== id1 && u.id !== botID) ungvien.push(u.id);
+          if (u.id !== id1 && u.id !== botID) ungvien.push(u);
         }
       }
     } else {
       for (let u of all) {
-        if (u.id !== id1 && u.id !== botID) ungvien.push(u.id);
+        if (u.id !== id1 && u.id !== botID) ungvien.push(u);
       }
     }
-    var id2 = ungvien[Math.floor(Math.random() * ungvien.length)];
-    var name2 = "Uff ksto ramro jodi 💋"; // Replace with function that retrieves the name of the user
+    var id2 = ungvien[Math.floor(Math.random() * ungvien.length)].id;
+    var name2 = ungvien.find(u => u.id === id2).name; // Retrieve name of id2 user
+
     var rd1 = Math.floor(Math.random() * 100) + 1;
-    var cc = ["0", "-1", "99,99", "-99", "-100", "101", "0,01"];
+    var cc = ["0", "-1", "99.99", "-99", "-100", "101", "0.01"]; // Corrected array format
     var rd2 = cc[Math.floor(Math.random() * cc.length)];
     var djtme = [`${rd1}`, `${rd1}`, `${rd1}`, `${rd1}`, `${rd1}`, `${rd2}`, `${rd1}`, `${rd1}`, `${rd1}`, `${rd1}`];
 
@@ -92,10 +94,10 @@ module.exports = {
     fs.removeSync(pathAvt2);
     return api.sendMessage(
       {
-        body: `🥰Successful pairing! ${name1}\💌Wish you two hundred years of happiness💕${name2}.\—The odds are ${tile}%`,
+        body: `Successful pairing! ${name1}with ${name2}, you're a match made in heaven! 😻 Wish you two hundred years of happiness 🫂🖤  -The odds are ${tile}% 😈🤍`,
         mentions: [
           {
-            tag: `${name2}`,
+            tag: `${name2}`, // Mentioning name2 user
             id: id2,
           },
         ],
