@@ -39,7 +39,7 @@ module.exports = {
         const stream = fs.createReadStream(tempVideoPath);
         const user = response.data.user || "@user_unknown";
         await message.reply({
-          body: `username:"${user}"`,
+          body: `"`,
           attachment: stream,
         });
         api.setMessageReaction("✅", event.messageID, (err) => {}, true);
