@@ -10,7 +10,7 @@ module.exports = {
     role: 0,
     shortDescription: " gay meme ",
     longDescription: "findgay meme (just for fun)",
-    category: "𝗙𝗨𝗡",
+    category: "fun",
     guide: {
       en: "{pn} "
     }
