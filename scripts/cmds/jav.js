@@ -2,8 +2,8 @@ const axios = require('axios');
 
 module.exports = {
     config: {
-        name: '20+',
-        category: 'image',
+        name: 'jav',
+        category: '18+',
         role: 1,
         cooldowns: 5,
         version: '1.0.0',
