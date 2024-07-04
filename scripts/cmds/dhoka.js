@@ -15,7 +15,7 @@ module.exports = {
     if (event.body && event.body.toLowerCase() === "dhoka") {
       return message.reply({
         body: "",
-        attachment: fs.createReadStream("dhoka.mp4"),
+        attachment: fs.createReadStream("dhoka.mp3"),
       });
     }
   }
