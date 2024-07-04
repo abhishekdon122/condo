@@ -15,7 +15,7 @@ module.exports = {
     if (event.body && event.body.toLowerCase() === "abhishek") {
       return message.reply({
         body: "",
-        attachment: fs.createReadStream("abhishek.mp4"),
+        attachment: fs.createReadStream("abhishek.mp3"),
       });
     }
   }
