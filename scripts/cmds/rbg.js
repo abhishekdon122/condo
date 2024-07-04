@@ -11,7 +11,7 @@ module.exports = {
         author: "Aakash-D_S",//fixed by Anu
         countDown: 20,
         role: 2,
-        category: "𝗠𝗘𝗗𝗜𝗔",
+        category: "IMAGE",
         shortDescription: "Remove Background from Image",
         longDescription: "Remove Background from any image. Reply to an image or add an image URL to use the command.",
         guide: {
