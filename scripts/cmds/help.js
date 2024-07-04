@@ -60,7 +60,7 @@ module.exports = {
                         const totalCommands = commands.size;
                         msg += `\n 
 ╭─────────◊
-│ » Type [${prefix}gcadmin add] to add
+│ » Type [${prefix}.addadmin] to add
 │ » admin to your group chat.
 │ » Total cmds: [ ${totalCommands}].
 │ » Type [ ${prefix}help <cmd> ]
