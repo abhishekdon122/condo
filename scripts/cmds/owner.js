@@ -26,9 +26,9 @@ module.exports = {
     const ownerUid = 100029100196795;
     const ownerData = await usersData.get(ownerUid);
     const ownerName = ownerData.name;
-    const authorAge =  "20";
+    const authorAge =  "Sweet 10";
     const authorInsta = " abhishekeyy.69 ";
-    const status =" single ";
+    const status ="Single 💔";
     const country =" Nepal ";
 
     message.reply({
