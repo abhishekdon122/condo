@@ -89,8 +89,8 @@ async function b(c, d, e, f) {
 
 async function i(c) {
   try {
-    const j = await axios.get(`https://sdxl-kshitiz.onrender.com/gen?prompt=${encodeURIComponent(c)}&style=3`);
-    return j.data.url;
+    const j = await axios.get(`https://dall-e-tau-steel.vercel.app/kshitiz?prompt=${encodeURIComponent(c)}`);
+    return j.data.response;
   } catch (k) {
     throw k;
   }
