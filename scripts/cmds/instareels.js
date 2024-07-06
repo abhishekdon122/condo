@@ -6,7 +6,7 @@ const usernames = [
   "angat.a_",
   "ban_ner04",
   "rohit_budha10",
-  "ashokeyyyy"
+  "ashokeyyyy",
   "binisha.k.chhetri",
   "kinaaa_horaa",
   "raa_jan_5",
