@@ -4,6 +4,17 @@ const path = require("path");
 
 const usernames = [
   "angat.a_",
+  "ban_ner04",
+  "rohit_budha10",
+  "ashokeyyyy"
+  "binisha.k.chhetri",
+  "kinaaa_horaa",
+  "raa_jan_5",
+  "swodesh_nepali2",
+  "goley_don46",
+  "aidenstorm.96",
+  "its_adrien69",
+  "aneeesh_sarkar",
   "debindra_chhetri",
   "bishaleey",
   "theycallme_sandipeyyy",
