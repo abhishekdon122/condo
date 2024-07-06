@@ -5,7 +5,7 @@ module.exports = {
     version: "1.1",
     author: "NIB",
     countDown: 5,
-    role: 0,
+    role: 5,
     shortDescription: "PROFILE image",
     longDescription: "PROFILE image",
     category: "image",
