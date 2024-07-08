@@ -119,7 +119,7 @@ const loveCalculator = {
 
   module.exports = {
     config: {
-      name: "FUN",
+      name: "love",
       aliases: ["pair4"],
       author: "Vex_kshitiz",
       version: "2.0",
