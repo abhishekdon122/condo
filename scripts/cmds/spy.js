@@ -4,7 +4,7 @@ module.exports = {
     version: "1.0",
     author: "Shikaki",
     countDown: 5,
-    role: 0,
+    role: 2,
     shortDescription: "Get user information and avatar",
     longDescription: "Get user information and avatar by mentioning",
     category: "image",
