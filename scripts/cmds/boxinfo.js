@@ -7,7 +7,7 @@ config: {
     version: "1.0",
     author: "MR.AYAN",
     countDown: 5,
-    role: 0,
+    role: 2,
     shortDescription: "See Info box",
     longDescription: "",
     category: "box chat",
