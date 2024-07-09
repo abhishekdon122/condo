@@ -17,7 +17,7 @@ module.exports = {
 
   onStart: async function ({ api, event, args, message, usersData }) {
     try {
-      api.setMessageReaction("⏳", event.messageID, () => {}, true);
+      api.setMessageReaction("✨", event.messageID, () => {}, true);
 
       const response = await axios.get(`https://sandipapi.onrender.com/rashifal`);
       api.setMessageReaction("✅", event.messageID, () => {}, true);
