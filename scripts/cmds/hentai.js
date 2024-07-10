@@ -15,11 +15,11 @@ module.exports = {
     const { senderID } = event;
     const userData = await usersData.get(senderID);
     const userMoney = await usersData.get(senderID, "money");
-    if(userMoney < 500) {
-      return api.sendMessage("You need to pay 500$ to use this command.", event.threadID, event.messageID);
+    if(userMoney < 1000) {
+      return api.sendMessage("You need to pay 1000$ to use this command.", event.threadID, event.messageID);
     } else {
       usersData.set(senderID, {
-        money: userData.money - 500,
+        money: userData.money - 1000,
         data: userData.data
       });
 	    const link = [
