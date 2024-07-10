@@ -7,7 +7,7 @@ const jimp = require('jimp');
 module.exports = {
     config: {
         name: "fakechat",
-        aliases: [],
+        aliases: [fc],
         version: "1.0",
         author: "kshitiz",
         countDown: 5,
