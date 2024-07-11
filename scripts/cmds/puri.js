@@ -4,7 +4,7 @@ const fs = require("fs-extra");
 module.exports = {
   config: {
     name: "puri",
-    aliases: [""], // Corrected alias syntax
+    aliases: ["puri"], // Corrected alias syntax
     version: "1.0",
     author: "OTINXSANDIP",
     countDown: 5,
