@@ -4,7 +4,7 @@ const path = require('path');
 const { getStreamFromURL, shortenURL, randomString } = global.utils;
 
 async function video(api, event, args, message) {
-    api.setMessageReaction("✨", event.messageID, (err) => {}, true);
+    api.setMessageReaction("🕢", event.messageID, (err) => {}, true);
     try {
         let title = '';
         let shortUrl = '';
@@ -23,7 +23,7 @@ async function video(api, event, args, message) {
             shortUrl = await extractShortUrl();
             const musicRecognitionResponse = await axios.get(`https://audio-recon-ahcw.onrender.com/kshitiz?url=${encodeURIComponent(shortUrl)}`);
             title = musicRecognitionResponse.data.title;
-            const searchResponse = await axios.get(`https://youtube-kshitiz-gamma.vercel.app/yt?search=${encodeURIComponent(title)}`);
+            const searchResponse = await axios.get(`https://youtube-kshitiz.vercel.app/youtube?search=${encodeURIComponent(title)}`);
             if (searchResponse.data.length > 0) {
                 videoId = searchResponse.data[0].videoId;
             }
