@@ -1,72 +1,33 @@
 const axios = require("axios");
-const fs = require("fs-extra");
-const path = require("path");
 
 module.exports = {
   config: {
     name: "say3",
-    aliases: [],
-    author: "Kshitiz",
-    version: "1.0",
-    cooldowns: 5,
+    version: "1.1",
+    author: "Otinxsandip",
+    countDown: 5,
     role: 0,
-    shortDescription: {
-      en: ""
-    },
-    longDescription: {
-      en: " text to speech"
-    },
-    category: "AI",
+    longDescription: "voice",
+    category: "ai",
     guide: {
-      en: "{p}say [text]"
+      en: "{pn} text or reply to text"
     }
   },
-  onStart: async function ({ api, event, args }) {
+
+  onStart: async function ({ api, event, args, getLang, message, usersData }) {
     try {
-      const { createReadStream, unlinkSync } = fs;
-      const { resolve } = path;
+      const text = event.type === 'message_reply' ? event.messageReply.body : args.join(' ');
+      if (!text) {
+        return message.reply('please type text or reply to text');
+      }
+      const link = `https://sandipapi.onrender.com/beast?text=${encodeURIComponent(text)}`;
 
-      const { messageID, threadID, senderID, body, mentions, type } = event;
-
-      const name = "Beast";
-
-      let chat = args.join(" ");
-
-    
-      const extractText = () => {
-        if (type === "message_reply") {
-          return event.messageReply.body;
-        } else if (mentions.length > 0) {
-          return mentions[0].body;
-        } else {
-          return chat;
-        }
-      };
-
-      chat = extractText();
-
-      if (!chat) return api.sendMessage(`Please provide text to convert to audio.`, threadID, messageID);
-
-      
-      const text = encodeURIComponent(chat);
-
-      const audioPath = resolve(__dirname, 'cache', `${threadID}_${senderID}_beast.mp3`);
-
-      const audioApi = await axios.get(`https://www.api.vyturex.com/beast?query=${text}`);
-
-      const audioUrl = audioApi.data.audio;
-
-      await global.utils.downloadFile(audioUrl, audioPath);
-
-      const att = createReadStream(audioPath);
-
-      api.sendMessage({
-        attachment: att,
-        body: '', 
-      }, threadID, null, messageID, () => unlinkSync(audioPath));
+      message.reply({
+        body: 'here is your tts',
+        attachment: await global.utils.getStreamFromURL(link)
+      });
     } catch (error) {
       console.error(error);
-      api.sendMessage("An error occurred while processing your request.", threadID, messageID);
     }
   }
 };
