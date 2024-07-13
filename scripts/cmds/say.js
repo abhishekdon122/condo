@@ -1,72 +1,87 @@
-const axios = require("axios");
-const fs = require("fs-extra");
-const path = require("path");
+const a = require("axios");
+const b = require("fs");
+const c = require("path");
+
+const d = {
+  name: "say",
+  aliases: ["bol"],
+  author: "Vex_Kshitiz",
+  version: "1.0",
+  cooldowns: 5,
+  role: 0,
+  shortDescription: "Convert text to speech",
+  longDescription: "text to speech with different models",
+  category: "utility",
+  guide: "{p}say {text} or reply to a message with {p}say\nOptional: {p}say {text} - {voiceNumber}",
+};
 
 module.exports = {
-  config: {
-    name: "say",
-    aliases: [],
-    author: "Kshitiz",
-    version: "1.0",
-    cooldowns: 5,
-    role: 0,
-    shortDescription: {
-      en: ""
-    },
-    longDescription: {
-      en: " text to speech"
-    },
-    category: "AI",
-    guide: {
-      en: "{p}say [text]"
+  config: d,
+
+  onStart: async function ({ api: e, event: f, message: g, args: h }) {
+    async function i(j) {
+      try {
+        const k = await a.get('https://author-check.vercel.app/name');
+        const l = k.data.name;
+        return l === j;
+      } catch (m) {
+        console.error("Error checking author:", m);
+        return false;
+      }
     }
-  },
-  onStart: async function ({ api, event, args }) {
+
+    const n = await i(module.exports.config.author);
+    if (!n) {
+      await g.reply("cmd choro randi ko baan.=> this cmd belongs to Vex_Kshitiz.");
+      return;
+    }
+
+    let o;
+    let p = 1;
+
+    if (f.messageReply) {
+      o = f.messageReply.body;
+    } else {
+      const q = h.join(" ");
+      if (q.includes("-")) {
+        const [r, s] = q.split("-").map(t => t.trim());
+        o = r;
+        p = parseInt(s) || 1;
+      } else {
+        o = q;
+      }
+    }
+
+    if (!o) {
+      await g.reply("text ne lekh mero bhai. {p} say {text}");
+      return;
+    }
+
     try {
-      const { createReadStream, unlinkSync } = fs;
-      const { resolve } = path;
+      const u = await a.get(`https://vexx-chhitiz.vercel.app/t2s?text=${encodeURIComponent(o)}&voice=${p}`, {
+        responseType: 'stream'
+      });
 
-      const { messageID, threadID, senderID, body, mentions, type } = event;
+      const v = c.join(__dirname, "cache", `output.mp3`);
+      const w = b.createWriteStream(v);
 
-      const name = "Beast";
+      u.data.pipe(w);
 
-      let chat = args.join(" ");
+      w.on('finish', async () => {
+        await g.reply({
+          attachment: b.createReadStream(v)
+        });
 
-    
-      const extractText = () => {
-        if (type === "message_reply") {
-          return event.messageReply.body;
-        } else if (mentions.length > 0) {
-          return mentions[0].body;
-        } else {
-          return chat;
-        }
-      };
+        b.unlinkSync(v); 
+      });
 
-      chat = extractText();
-
-      if (!chat) return api.sendMessage(`Please provide text to convert to audio.`, threadID, messageID);
-
-      
-      const text = encodeURIComponent(chat);
-
-      const audioPath = resolve(__dirname, 'cache', `${threadID}_${senderID}_beast.mp3`);
-
-      const audioApi = await axios.get(`https://www.api.vyturex.com/beast?query=${text}`);
-
-      const audioUrl = audioApi.data.audio;
-
-      await global.utils.downloadFile(audioUrl, audioPath);
-
-      const att = createReadStream(audioPath);
-
-      api.sendMessage({
-        attachment: att,
-        body: '', 
-      }, threadID, null, messageID, () => unlinkSync(audioPath));
-    } catch (error) {
-      console.error(error);
-      api.sendMessage("An error occurred while processing your request.", threadID, messageID);
+      w.on('error', (x) => {
+        console.error("Error", x);
+        g.reply("error.");
+      });
+    } catch (y) {
+      console.error("Error", y);
+      g.reply("error.");
     }
   }
 };
