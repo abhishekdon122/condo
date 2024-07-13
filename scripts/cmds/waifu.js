@@ -23,7 +23,7 @@ module.exports = {
 				let img = res2.url;
 
 				const form = {
-					body: `   「 𝔀𝓪𝓲𝓯𝓾 」   `
+					body: ` `
 				};
 				if (img)
 					form.attachment = await global.utils.getStreamFromURL(img);
@@ -38,7 +38,7 @@ module.exports = {
 				let img1 = res2.url;
 
 				const form = {
-					body: `    `
+					body: `   `
 				};
 				if (img1)
 					form.attachment = await global.utils.getStreamFromURL(img1);
