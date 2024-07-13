@@ -7,7 +7,7 @@ module.exports = {
 		version: "1.0",
 		author: "@tas33n",
 		countDown: 1,
-		role: 0,
+		role: 2,
 		shortDescription: "find gay",
 		longDescription: "",
 		category: "box chat",
