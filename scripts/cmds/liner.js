@@ -1,60 +1,75 @@
 const axios = require('axios');
 
-async function liner(api, event, args, message) {
-  try {
-    const prompt = args.join(" ").trim();
-
-    if (!prompt) {
-      return message.reply("Please provide a prompt.");
-    }
-
-    const response = await getLinerResponse(prompt);
-
-    if (response && response.answer) {
-      message.reply(response.answer, (r, s) => {
-        global.GoatBot.onReply.set(s.messageID, {
-          commandName: module.exports.config.name,
-          uid: event.senderID 
-        });
-      });
-    } else {
-      message.reply("No response from Liner.");
-    }
-  } catch (error) {
-    console.error("Error:", error);
-    message.reply("An error occurred while processing your request.");
-  }
-}
-
-async function getLinerResponse(prompt) {
-  try {
-    const url = `https://liner-ai.vercel.app/kshitiz?prompt=${encodeURIComponent(prompt)}`;
-    const response = await axios.get(url);
-    return response.data;
-  } catch (error) {
-    console.error("Error from Liner API:", error.message);
-    throw error;
-  }
-}
-
 module.exports = {
   config: {
     name: "liner",
-    version: "1.0",
-    author: "Vex_Kshitiz",
-    role: 0,
-    longDescription: "Liner AI assistant.",
+    aliases: ["linerai", "la"],
+    version: 2.0,
+    author: "OtinXSandip",
+    description: "liner ai",
     category: "ai",
     guide: {
-      en: "{p}liner [prompt]"
+      en: "{p}{n} <Query>",
+    },
+  },
+  onStart: async function ({ message, usersData, event, api, args }) {
+    try {
+      const id = event.senderID;
+      const userData = await usersData.get(id);
+      const name = userData.name;
+
+      const ment = [{ id: id, tag: name }];
+      const prompt = args.join(" ").trim();
+
+      if (!prompt) {
+        return message.reply("Please provide questions");
+      }
+
+      const res = await axios.get(`https://sandipbaruwal.onrender.com/linerai?prompt=${encodeURIComponent(prompt)}`);
+      const result = res.data.answer;
+
+      message.reply({
+        body: `${name} ${result}
+
+You can reply to continue chatting`,
+        mentions: ment,
+      }, (err, info) => {
+        global.GoatBot.onReply.set(info.messageID, {
+          commandName: this.config.name,
+          messageID: info.messageID,
+          author: event.senderID
+        });
+      });
+    } catch (error) {
+      console.error("Error:", error.message);
     }
   },
+  onReply: async function ({ message, event, Reply, args, api, usersData }) {
+    try {
+      const id = event.senderID;
+      const userData = await usersData.get(id);
+      const name = userData.name;
 
-  handleCommand: liner,
-  onStart: function ({ api, message, event, args }) {
-    return liner(api, event, args, message);
-  },
-  onReply: function ({ api, message, event, args }) {
-    return liner(api, event, args, message);
+      const ment = [{ id: id, tag: name }];
+      const prompt = args.join(" ").trim();
+      const encodedPrompt = encodeURIComponent(prompt);
+      const res = await axios.get(`https://sandipbaruwal.onrender.com/linerai?prompt=${encodedPrompt}`);
+      const result = res.data.answer;
+
+      message.reply({
+        body: `${name} ${result}
+
+You can reply to continue chatting`,
+        mentions: ment,
+      }, (err, info) => {
+        global.GoatBot.onReply.set(info.messageID, {
+          commandName: this.config.name,
+          messageID: info.messageID,
+          author: event.senderID
+        });
+      });
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
   }
 };
