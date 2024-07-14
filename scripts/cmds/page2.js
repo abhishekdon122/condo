@@ -59,7 +59,7 @@ module.exports = {
             if (fs.existsSync(filePath)) {
               await api.sendMessage(
                 {
-                  body: "Random video from the page:",
+                  body: "",
                   attachment: fs.createReadStream(filePath),
                 },
                 event.threadID
