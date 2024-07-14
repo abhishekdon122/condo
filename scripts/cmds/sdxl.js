@@ -36,7 +36,7 @@ module.exports = {
     
     message.reply("", async (err, info) => {
       message.reply({ 
-body: `✅`,
+body: ``,
         attachment: await global.utils.getStreamFromURL(baseURL)
       });
       let ui = info.messageID;
