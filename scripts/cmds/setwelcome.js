@@ -3,7 +3,7 @@ const { drive, getStreamFromURL, getExtFromUrl, getTime } = global.utils;
 module.exports = {
 	config: {
 		name: "setwelcome",
-		aliases: ["setwc"],
+		aliases: ["sw"],
 		version: "1.7",
 		author: "NTKhang",
 		countDown: 5,
