@@ -1,7 +1,7 @@
 const fs = require('fs');
 module.exports = {
   config: {
-    name: "hi",
+    name: "attitude",
     version: "1.0",
     author: "otineeeeyyyy",
     countDown: 5,
@@ -12,10 +12,10 @@ module.exports = {
   },
   onStart: async function(){},
   onChat: async function({ event, message, getLang }) {
-    if (event.body && event.body.toLowerCase() === "hi") {
+    if (event.body && event.body.toLowerCase() === "attitude") {
       return message.reply({
         body: "",
-        attachment: fs.createReadStream("hi.mp3"),
+        attachment: fs.createReadStream("attitude.mp4"),
       });
     }
   }
