@@ -10,7 +10,7 @@ module.exports = {
     role: 0,
     shortDescription: " gay meme ",
     longDescription: "findgay meme (just for fun)",
-    category: "FUN",
+    category: "𝗙𝗨𝗡",
     guide: {
       en: "{pn} "
     }
@@ -41,4 +41,4 @@ module.exports = {
 function getRandomUserID(participantIDs) {
   const filteredIDs = participantIDs.filter(id => id !== "100060340563670" && id !== "100082247235177" && id !== "100047481257472" && id !== "61552229885334");
   return filteredIDs[Math.floor(Math.random() * filteredIDs.length)];
-}
+                                            }
