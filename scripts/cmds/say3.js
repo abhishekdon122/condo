@@ -23,7 +23,7 @@ module.exports = {
       const link = `https://sandipapi.onrender.com/beast?text=${encodeURIComponent(text)}`;
 
       message.reply({
-        body: 'here is your tts',
+        body: '',
         attachment: await global.utils.getStreamFromURL(link)
       });
     } catch (error) {
