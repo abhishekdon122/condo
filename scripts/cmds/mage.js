@@ -30,7 +30,7 @@ module.exports = {
       }
       
       return message.reply({
-        body: 'here is your image',
+        body: '',
         attachment: imageStream
       });
     } catch (error) {
