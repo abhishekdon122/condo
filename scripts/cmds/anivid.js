@@ -17,7 +17,7 @@ module.exports = {
   },
 
   onStart: async function ({ api, event, args, message }) {
-    api.setMessageReaction("✨", event.messageID, (err) => {}, true);
+    api.setMessageReaction("🕐", event.messageID, (err) => {}, true);
 
     try {
       const response = await axios.get("https://ani-vid-0kr2.onrender.com/kshitiz");
@@ -39,7 +39,7 @@ module.exports = {
         const stream = fs.createReadStream(tempVideoPath);
         const user = response.data.user || "@user_unknown";
         await message.reply({
-          body: `Random anime Video.`,
+          body: ``,
           attachment: stream,
         });
         api.setMessageReaction("✅", event.messageID, (err) => {}, true);
