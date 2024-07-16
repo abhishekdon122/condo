@@ -1,5 +1,15 @@
 const fs = require("fs-extra");
+const axios = require("axios");
 const { utils } = global;
+
+async function getStreamFromURL(url) {
+	const response = await axios({
+		url,
+		method: 'GET',
+		responseType: 'stream'
+	});
+	return response.data;
+}
 
 module.exports = {
 	config: {
@@ -95,9 +105,15 @@ module.exports = {
 	},
 
 	onChat: async function ({ event, message, getLang }) {
-		if (event.body && event.body.toLowerCase() === "prefix")
-			return () => {
-				return message.reply(getLang("myPrefix", global.GoatBot.config.prefix, utils.getPrefix(event.threadID)));
-			};
+		if (event.body && event.body.toLowerCase() === "prefix") {
+			const imageUrl = "https://i.imgur.com/A6AEF1U.jpeg";
+			const attachment = await getStreamFromURL(imageUrl);
+			const currentPrefix = utils.getPrefix(event.threadID);
+			const replyText = `┏𝙋𝙧𝙚𝙛𝙞𝙭\n┣Use ${currentPrefix}help to see commands\n┗━━━━⦿【${currentPrefix}】`;
+			return message.reply({
+				body: replyText,
+				attachment
+			});
+		}
 	}
 };
