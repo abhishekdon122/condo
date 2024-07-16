@@ -9,7 +9,7 @@ module.exports = {
     guide: {
       en: "{pn}"
     },
-    aliases: ["adminbot"]
+    aliases: ["aa"]
   },
 
   onStart: async function ({ api, event }) {
