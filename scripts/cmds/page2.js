@@ -21,7 +21,7 @@ module.exports = {
 
   onStart: async function ({ api, event, args }) {
     try {
-      const loadingMessage = await api.sendMessage("", event.threadID);
+      const loadingMessage = await api.sendMessage("भिडियो आउँदै छ रूक 😙💗", event.threadID);
 
       const pageId = "10AM02"; // Replace with the ID or username of the Facebook page 
       const accessToken = "EAAD6V7os0gcBO29qI1SswcMAcQ9j1sYPZCPAb9OmM7qQhXZC2COZBgk4COYImaCV6ICanLqRdxgUDDQyrzekjrZC1UJxDUHMZBzue7Tj5xSH2XLNNewHoRQM945ZCvZBedk3zJDXcjnpgzwYr09u6GQ4HyrZAsASGRTs4PEM4n9xuIrpfPFjW6m3mhln0mvtFKCh4AZDZD";// use your EAAD6V7 token
