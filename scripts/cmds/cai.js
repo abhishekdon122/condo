@@ -1,32 +1,67 @@
-const axios = require('axios');
+const axios = require("axios");
 
-const models = ["jasrel1", "giyu", "gojo", "akhiro"];
+let defaultCharacter = "";
 
 module.exports = {
   config: {
     name: "cai",
-    aliases: ["characterAI", "char.ai"],
-    author: "AkhiroDEV",
-    shortDescription: "Interact with available characters by choosing a model and putting your query",
+    version: "1.0",
+    author: "Samir Å’",
+    aliases: ["roleplay", "pretend"],
+    countDown: 5,
+    role: 0,
+    category: "ð—™ð—¨ð—¡"
   },
-  async onStart({ message, args }) {
-    if (args.length < 2) {
-      return message.reply(`Please choose a model (${models.join(', ')}) and put your query.`);
-    }
-
-    const chosenModel = args[0];
-    const query = args.slice(1).join(" ");
-
-    if (!models.includes(chosenModel)) {
-      return message.reply(`Invalid model. Please choose from the following: ${models.join(', ')}`);
-    }
-
+  onStart: async function ({ message, event, args, commandName }) {
+    const [question, character] = args.join(' ').split('|').map(item => item.trim());
+    const selectedCharacter = character || defaultCharacter;
+let uid = event.senderID;
     try {
-      const response = await axios.get(`https://akhiroai.onrender.com/api?model=${encodeURIComponent(chosenModel)}&q=${encodeURIComponent(query)}`);
-      message.reply(response.data.message);
+      const response = await axios.get(`https://www.samirxpikachu.run.place/characterAi?message=${encodeURIComponent(question)}&name=${encodeURIComponent(selectedCharacter)}&userID=${uid}`);
+
+      if (response.data && response.data) {
+        const answer = response.data.text;
+        const characterName = `${answer}`;
+
+        const ansimg = response.data.profile;
+        message.reply({ body: characterName, attachment:await global.utils.getStreamFromURL(`${ansimg}`) }, (err, info) => {
+          global.GoatBot.onReply.set(info.messageID, {
+            commandName,
+            messageID: info.messageID,
+            author: event.senderID,
+            character: selectedCharacter
+          });
+        });
+      }
+
     } catch (error) {
-      console.error(error);
-      message.reply(`ERROR: ${error.message}`);
+      message.reply("Error:", error.message);
+    }
+  },
+
+  onReply: async function ({ message, event, Reply, args }) {
+    let { author, commandName, character } = Reply;
+    if (event.senderID != author) return;
+    const [question] = args.join(' ').split('|').map(item => item.trim());
+let uid = event.senderID;
+    try {
+      const response = await axios.get(`https://www.samirxpikachu.run.place/characterAi?message=${encodeURIComponent(question)}&name=${encodeURIComponent(character)}&userID=${uid}`);
+
+      if (response.data && response.data) {
+        const answer = response.data.text;
+        const characterName = `${answer}`;
+        message.reply({ body: characterName }, (err, info) => {
+          global.GoatBot.onReply.set(info.messageID, {
+            commandName,
+            messageID: info.messageID,
+            author: event.senderID,
+            character: character
+          });
+        });
+      }
+
+    } catch (error) {
+      message.reply("Error:", error.message);
     }
   }
-}
+};
