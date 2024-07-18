@@ -6,8 +6,8 @@ module.exports = {
   config: {
     name: "leave",
     aliases: ["l"],
-    version: "2.0",
-    author: "Kshitiz",
+    version: "2.0", 
+    author: "Vex_Kshitiz",
     countDown: 5,
     role: 2,
     shortDescription: "Bot will leave a group chat",
@@ -20,7 +20,7 @@ module.exports = {
 
   onStart: async function ({ api, event }) {
     try {
-      const groupList = await api.getThreadList(10, null, ['INBOX']);
+      const groupList = await api.getThreadList(300, null, ['INBOX']); 
 
       const filteredList = groupList.filter(group => group.threadName !== null);
 
@@ -30,13 +30,19 @@ module.exports = {
         const formattedList = filteredList.map((group, index) =>
           `│${index + 1}. ${group.threadName}\n│𝐓𝐈𝐃: ${group.threadID}`
         );
-        const message = `╭─╮\n│𝐋𝐢𝐬𝐭 𝐨𝐟 𝐠𝐫𝐨𝐮𝐩 𝐜𝐡𝐚𝐭𝐬:\n${formattedList.map(line => `${line}`).join("\n")}\n╰───────────ꔪ`;
+
+       
+        const start = 0;
+        const currentList = formattedList.slice(start, start + 5);
+
+        const message = `╭─╮\n│𝐋𝐢𝐬𝐭 𝐨𝐟 𝐠𝐫𝐨𝐮𝐩 𝐜𝐡𝐚𝐭𝐬:\n${currentList.join("\n")}\n╰───────────ꔪ`;
 
         const sentMessage = await api.sendMessage(message, event.threadID);
         global.GoatBot.onReply.set(sentMessage.messageID, {
           commandName: 'leave',
           messageID: sentMessage.messageID,
           author: event.senderID,
+          start,
         });
       }
     } catch (error) {
@@ -45,40 +51,111 @@ module.exports = {
   },
 
   onReply: async function ({ api, event, Reply, args }) {
-    const { author, commandName } = Reply;
+    const { author, commandName, start } = Reply;
 
     if (event.senderID !== author) {
       return;
     }
 
-    const groupIndex = parseInt(args[0], 10);
+    const userInput = args.join(" ").trim().toLowerCase();
 
-    if (isNaN(groupIndex) || groupIndex <= 0) {
-      api.sendMessage('Invalid input.\nPlease provide a valid number.', event.threadID, event.messageID);
-      return;
-    }
+    if (userInput === 'next') {
+  
+      const nextPageStart = start + 5;
+      const nextPageEnd = nextPageStart + 5;
 
-    try {
-      const groupList = await api.getThreadList(10, null, ['INBOX']);
-      const filteredList = groupList.filter(group => group.threadName !== null);
+      try {
+        const groupList = await api.getThreadList(300, null, ['INBOX']);
+        const filteredList = groupList.filter(group => group.threadName !== null);
 
-      if (groupIndex > filteredList.length) {
-        api.sendMessage('Invalid group number.\nPlease choose a number within the range.', event.threadID, event.messageID);
-        return;
+        if (nextPageStart >= filteredList.length) {
+          api.sendMessage('End of list reached.', event.threadID, event.messageID);
+          return;
+        }
+
+        const currentList = filteredList.slice(nextPageStart, nextPageEnd).map((group, index) =>
+          `${nextPageStart + index + 1}. ${group.threadName}\n𝐓𝐈𝐃: ${group.threadID}`
+        );
+
+        const message = `╭─╮\n│𝐋𝐢𝐬𝐭 𝐨𝐟 𝐠𝐫𝐨𝐮𝐩 𝐜𝐡𝐚𝐭𝐬:\n${currentList.join("\n")}\n╰───────────ꔪ`;
+
+        const sentMessage = await api.sendMessage(message, event.threadID);
+        global.GoatBot.onReply.set(sentMessage.messageID, {
+          commandName: 'leave',
+          messageID: sentMessage.messageID,
+          author: event.senderID,
+          start: nextPageStart,
+        });
+
+      } catch (error) {
+        console.error("Error listing group chats", error);
+        api.sendMessage('An error occurred while listing group chats.', event.threadID, event.messageID);
       }
 
-      const selectedGroup = filteredList[groupIndex - 1];
-      const groupID = selectedGroup.threadID;
+    } else if (userInput === 'previous') {
+  
+      const prevPageStart = Math.max(start - 5, 0);
+      const prevPageEnd = prevPageStart + 5;
 
-      const botUserId = api.getCurrentUserID();
-      await api.removeUserFromGroup(botUserId, groupID);
+      try {
+        const groupList = await api.getThreadList(300, null, ['INBOX']);
+        const filteredList = groupList.filter(group => group.threadName !== null);
 
-      api.sendMessage(`Left the group chat: ${selectedGroup.threadName}`, event.threadID, event.messageID);
-    } catch (error) {
-      console.error("Error leaving group chat", error);
-      api.sendMessage('An error occurred while leaving the group chat.\nPlease try again later.', event.threadID, event.messageID);
-    } finally {
-      global.GoatBot.onReply.delete(event.messageID);
+        if (prevPageStart < 0) {
+          api.sendMessage('Already at the beginning of the list.', event.threadID, event.messageID);
+          return;
+        }
+
+        const currentList = filteredList.slice(prevPageStart, prevPageEnd).map((group, index) =>
+          `${prevPageStart + index + 1}. ${group.threadName}\n𝐓𝐈𝐃: ${group.threadID}`
+        );
+
+        const message = `╭─╮\n│𝐋𝐢𝐬𝐭 𝐨𝐟 𝐠𝐫𝐨𝐮𝐩 𝐜𝐡𝐚𝐭𝐬:\n${currentList.join("\n")}\n╰───────────ꔪ`;
+
+        const sentMessage = await api.sendMessage(message, event.threadID);
+        global.GoatBot.onReply.set(sentMessage.messageID, {
+          commandName: 'leave',
+          messageID: sentMessage.messageID,
+          author: event.senderID,
+          start: prevPageStart,
+        });
+
+      } catch (error) {
+        console.error("Error listing group chats", error);
+        api.sendMessage('An error occurred while listing group chats.', event.threadID, event.messageID);
+      }
+
+    } else if (!isNaN(userInput)) {
+  
+      const groupIndex = parseInt(userInput, 10);
+
+      try {
+        const groupList = await api.getThreadList(300, null, ['INBOX']);
+        const filteredList = groupList.filter(group => group.threadName !== null);
+
+        if (groupIndex <= 0 || groupIndex > filteredList.length) {
+          api.sendMessage('Invalid group number.\nPlease choose a number within the range.', event.threadID, event.messageID);
+          return;
+        }
+
+        const selectedGroup = filteredList[groupIndex - 1];
+        const groupID = selectedGroup.threadID;
+
+        const botUserId = api.getCurrentUserID();
+        await api.removeUserFromGroup(botUserId, groupID);
+
+        api.sendMessage(`Left the group chat: ${selectedGroup.threadName}`, event.threadID, event.messageID);
+
+      } catch (error) {
+        console.error("Error leaving group chat", error);
+        api.sendMessage('An error occurred while leaving the group chat.\nPlease try again later.', event.threadID, event.messageID);
+      }
+
+    } else {
+      api.sendMessage('Invalid input.\nPlease provide a valid number or reply with "next" or "previous".', event.threadID, event.messageID);
     }
+
+   
+    global.GoatBot.onReply.delete(event.messageID);
   },
 };
