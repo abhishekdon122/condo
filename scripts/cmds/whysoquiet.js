@@ -17,10 +17,10 @@ module.exports = {
   },
 
   onStart: async function ({ api, event, args, message }) {
-    api.setMessageReaction("🕐", event.messageID, (err) => {}, true);
+    api.setMessageReaction("✨", event.messageID, (err) => {}, true);
 
     try {
-      const response = await axios.get("https://whysoquite.onrender.com/kshitiz");
+      const response = await axios.get("https://whysoquite-93dh.onrender.com/kshitiz");
       const postData = response.data.posts;
       const randomIndex = Math.floor(Math.random() * postData.length);
       const randomPost = postData[randomIndex];
