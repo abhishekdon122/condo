@@ -30,7 +30,7 @@ async function animeSong(api, event, args, message) {
             const audioFile = path.join(__dirname, "cache", "ff.mp4");
             const audioReadStream = fs.createReadStream(audioFile);
             const shortUrl = await shortenURL(videoDownloadUrl);
-            message.reply({ body: `\n `, attachment: audioReadStream });
+            message.reply({ body: ``, attachment: audioReadStream });
             api.setMessageReaction("✅", event.messageID, () => {}, true);
         });
 
