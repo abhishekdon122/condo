@@ -2,11 +2,11 @@ const fs = require('fs');
 const request = require('request');
 
 module.exports.config = {
-    name: "sendnotii",
+    name: "",
     version: "1.0.0",
     hasPermssion: 2,
     credits: "TruongMini, mod by Clarence-DK",
-    description: "",
+    description: "send",
     commandCategory: "Tiện ích",
     usages: "[msgg]",
     cooldowns: 5,
