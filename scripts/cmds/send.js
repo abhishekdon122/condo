@@ -2,11 +2,11 @@ const fs = require('fs');
 const request = require('request');
 
 module.exports.config = {
-    name: "",
+    name: "send",
     version: "1.0.0",
     hasPermssion: 2,
     credits: "TruongMini, mod by Clarence-DK",
-    description: "send",
+    description: "",
     commandCategory: "Tiện ích",
     usages: "[msgg]",
     cooldowns: 5,
