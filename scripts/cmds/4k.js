@@ -8,7 +8,7 @@ module.exports = {
     version: "1.0",
     author: "JARiF",
     countDown: 15,
-    role: 0,
+    role: 2,
     longDescription: "Upscale your image.",
     category: "image",
     guide: {
