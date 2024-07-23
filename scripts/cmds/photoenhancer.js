@@ -25,7 +25,7 @@ module.exports = {
     aliases: ["peh"],
     version: "1.0",
     author: "hedroxyy",
-    role: 0,
+    role: 2,
     category: "image",
     description: "Enhances the photo you reply to.",
     guide: {
