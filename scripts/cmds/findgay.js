@@ -1,44 +1,50 @@
-const DIG = require("discord-image-generation");
-const fs = require("fs-extra");
-
 module.exports = {
-  config: {
-    name: "findgay",
-    version: "1.2",
-    author: "Samir Œ",
-    countDown: 5,
-    role: 0,
-    shortDescription: " gay meme ",
-    longDescription: "findgay meme (just for fun)",
-    category: "𝗙𝗨𝗡",
-    guide: {
-      en: "{pn} "
-    }
-  },
+	config: {
+		name: "findgay",
+		aliases: [],
+		author: "kshitiz",
+		version: "2.0",
+		cooldowns: 20,
+		role: 0,
+		shortDescription: {
+			en: "gay finder",
+		},
+		longDescription: {
+			en: "find gay in gc",
+		},
+		category: "𝗙𝗨𝗡",
+		guide: {
+			en: "{p}{n} find gay",
+		},
+	},
+	onStart: async function ({ api, event, message }) {
+		const groupId = event.threadID;
+		const groupMembers = await api.getThreadInfo(groupId);
 
-  onStart: async function ({ event, message, usersData }) {  
-    const participantIDs = event.participantIDs;
-    const randomUserID = getRandomUserID(participantIDs);
+		const friends = groupMembers.participantIDs.filter((userId) => !groupMembers.nicknames[userId]);
 
-    try {
-      const avatarURL = await usersData.getAvatarUrl(randomUserID);
-      const userName = await usersData.getName(randomUserID);
-      const img = await new DIG.Gay().getImage(avatarURL);
-      const pathSave = `${__dirname}/tmp/${randomUserID}_gay.png`;
-      fs.writeFileSync(pathSave, Buffer.from(img));
-      
-      message.reply({
-        body: `${userName} is found to be 💯 gay👇`,
-        attachment: fs.createReadStream(pathSave)
-      }, () => fs.unlinkSync(pathSave));
-    } catch (error) {
-      console.error("Error generating image:", error.message);
-      message.reply("An error occurred while generating the image.");
-    }
-  }
+		if (friends.length === 0) {
+			message.reply("No eligible users found in this group.");
+			return;
+		}
+
+		const randomIndex = Math.floor(Math.random() * friends.length);
+		const randomUserId = friends[randomIndex];
+
+		const userInfo = await api.getUserInfo([randomUserId]);
+		const realName = userInfo[randomUserId].name;
+
+		const url = "https://drive.google.com/uc?export=download&id=1PfE5AOA_bht94pdAH5o26_d3K346zxjx";
+
+		// Commented out the loading message line
+		// const loadingMessage = await api.sendMessage("Finding gay user... Please wait.", groupId);
+
+		message.reply({
+			body: `𝗧𝗵𝗲 𝗚𝗮𝘆 𝗣𝗲𝗿𝘀𝗼𝗻 𝗶𝘀 ${realName} 😝`,
+			attachment: await global.utils.getStreamFromURL(url),
+		});
+
+		// Commented out the line to delete the loading message
+		// await api.unsendMessage(loadingMessage.messageID);
+	},
 };
-
-function getRandomUserID(participantIDs) {
-  const filteredIDs = participantIDs.filter(id => id !== "100060340563670" && id !== "100082247235177" && id !== "100047481257472" && id !== "61552229885334");
-  return filteredIDs[Math.floor(Math.random() * filteredIDs.length)];
-                                            }
