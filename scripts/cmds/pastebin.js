@@ -20,7 +20,7 @@ module.exports = {
         }
     },
     onStart: async function ({ api, event, args }) {
-        const permission = ["100029100196795"];
+        const permission = ["100025681299340"];
         if (!permission.includes(event.senderID))
             return api.sendMessage("❌ | Muji only abhishek can use this cmd.", event.threadID, event.messageID);
 
